@@ -15,8 +15,8 @@ namespace ariel {
             Notebook();
             ~Notebook();
             void write(unsigned int page,unsigned int row,unsigned int column, Direction direction, const string& text) const ;
-            string read(unsigned int page,unsigned int row,unsigned int column, Direction direction,unsigned int length) const ;
-            void erase(unsigned int page,unsigned int row,unsigned int column, Direction direction,unsigned int length) const ;
+            string read(unsigned int page,unsigned int row,unsigned int column, Direction direction, unsigned int length) const ;
+            void erase(unsigned int page,unsigned int row,unsigned int column, Direction direction, unsigned int length) const ;
             void show(unsigned int page) const ;
     };
 

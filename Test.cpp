@@ -181,7 +181,7 @@ TEST_CASE("shood not raise an error"){
 }
 
 
-TEST_CASE("shood raise an error"){
+TEST_CASE("shood raise an error in the first line"){
     /*
     checks spcial cases  (writning _ or ~ is ilegel)
     */
@@ -192,6 +192,25 @@ TEST_CASE("shood raise an error"){
 
     CHECK_THROWS(notebook.write(0,0,0,Direction::Vertical,test_str));
     test_str = string(50, '_');
-
-    CHECK_THROWS(notebook.write(0,0,0,Direction::Vertical,test_str));
+    CHECK_NOTHROW(notebook.write(0,0,0,Direction::Vertical,test_str));
+    test_str = string(50, 'a');
+    CHECK_NOTHROW(notebook.write(0,0,0,Direction::Vertical,test_str));
 }
+
+// TEST_CASE("shood raise an error "){
+//     //negetive number in row col and page will raise an error and show
+//     Notebook notebook;
+//     CHECK_THROWS(notebook.write(-1,0,0,Direction::Horizontal,"a"));
+//     CHECK_THROWS(notebook.write(0,-1,0,Direction::Horizontal,"a"));
+//     CHECK_THROWS(notebook.write(0,0,-1,Direction::Horizontal,"a"));
+ 
+//     CHECK_THROWS(notebook.read(-1,0,0,Direction::Horizontal,1));
+//     CHECK_THROWS(notebook.read(0,-1,0,Direction::Horizontal,1));
+//     CHECK_THROWS(notebook.read(0,0,-1,Direction::Horizontal,1));
+
+//     CHECK_THROWS(notebook.erase(-1,0,0,Direction::Horizontal,1));
+//     CHECK_THROWS(notebook.erase(0,-1,0,Direction::Horizontal,1));
+//     CHECK_THROWS(notebook.erase(0,0,-1,Direction::Horizontal,1));
+    
+//     CHECK_THROWS(notebook.show(-1));
+// }
