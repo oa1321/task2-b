@@ -80,15 +80,15 @@ TEST_CASE("shood raise an error"){
     }
 }
 
-TEST_CASE("shood raise an error"){
+TEST_CASE("shood not raise an error"){
     /*
-    chekc if error is raisen when erase  on a col when this col were erase before (legel is when col 0 to 99)
+    chekc if erase  on a col when this col were erase before is legel(legel is when col 0 to 99)
     */
     Notebook notebook;
 
     for(unsigned int i = 0; i < 100; i++){
         CHECK_NOTHROW(notebook.erase(0,0,i,Direction::Horizontal,1));
-        CHECK_THROWS(notebook.erase(0,0,i,Direction::Horizontal,1));
+        CHECK_NOTHROW(notebook.erase(0,0,i,Direction::Horizontal,1));
     }
 }
 
@@ -162,4 +162,36 @@ TEST_CASE("shood not raise an error"){
         }
     }
     
+}
+
+TEST_CASE("shood not raise an error"){
+    /*
+    check vertical writing and reading and erasing with line size more than 100
+    */
+    Notebook notebook;
+    
+    string test_str;
+    test_str = string(300, 'a');
+
+    CHECK_NOTHROW(notebook.write(0,0,0,Direction::Vertical,test_str));
+    CHECK_NOTHROW(notebook.read(0,0,0,Direction::Vertical,test_str.size()));
+    CHECK_NOTHROW(notebook.erase(0,0,0,Direction::Vertical,test_str.size()));
+    
+
+}
+
+
+TEST_CASE("shood raise an error"){
+    /*
+    checks spcial cases  (writning _ or ~ is ilegel)
+    */
+    Notebook notebook;
+    
+    string test_str;
+    test_str = string(50, '~');
+
+    CHECK_THROWS(notebook.write(0,0,0,Direction::Vertical,test_str));
+    test_str = string(50, '_');
+
+    CHECK_THROWS(notebook.write(0,0,0,Direction::Vertical,test_str));
 }
